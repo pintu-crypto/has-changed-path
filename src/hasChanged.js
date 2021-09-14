@@ -24,7 +24,7 @@ async function hasChanged(pathsToSearch,targetBranch) {
     'diff',
     '--quiet',
     'origin/main',
-    targetBranch,
+    `origin/${targetBranch}`,
     '--',
     ...paths,
   ], {
