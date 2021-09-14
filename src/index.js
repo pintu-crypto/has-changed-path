@@ -6,7 +6,8 @@ const hasChanged = require('./hasChanged');
 async function run() {
   try {
     const paths = core.getInput('paths', { required: true });
-    const changed = await hasChanged(paths)
+    const targetBranch = core.getInput('targetBranch', { required: true });
+    const changed = await hasChanged(paths,targetBranch)
 
     if (changed) {
       core.info(`Code in the following paths changed: ${paths}`)

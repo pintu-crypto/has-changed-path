@@ -4,6 +4,9 @@ inputs:
   paths: # one or more paths
     description: "Paths to detect changes"
     required: true
+  targetBranch: # one or more paths
+    description: "targetBranch to detect changes"
+    required: true
 outputs:
   changed:
     description: "Boolean indicating if the paths were changed in previous commit"

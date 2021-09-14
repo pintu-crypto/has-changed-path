@@ -1,9 +1,9 @@
 const exec = require('@actions/exec')
 
-async function main(pathsToSearch = '') {
+async function main(pathsToSearch = '', targetBranch = '') {
   throwsForInvalidPaths(pathsToSearch)
 
-  return hasChanged(pathsToSearch)
+  return hasChanged(pathsToSearch, targetBranch)
 }
 
 function throwsForInvalidPaths(pathsToSearch) {
@@ -16,15 +16,15 @@ function getCWD() {
   return `${GITHUB_WORKSPACE}/${SOURCE}`
 }
 
-async function hasChanged(pathsToSearch) {
+async function hasChanged(pathsToSearch,targetBranch) {
   const paths = pathsToSearch.split(' ')
 
   //  --quiet: exits with 1 if there were differences (https://git-scm.com/docs/git-diff)
   const exitCode = await exec.exec('git', [
     'diff',
     '--quiet',
-    'HEAD~1',
-    'HEAD',
+    'origin/main',
+    targetBranch,
     '--',
     ...paths,
   ], {
